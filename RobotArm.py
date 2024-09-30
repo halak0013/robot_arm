@@ -22,7 +22,7 @@ BEL = 23
 
 
 class RobotArm:
-    def __init__(self, target_width=1080, target_height=720, source = "camera", detection_confidence=0.65, max_hands=1,):
+    def __init__(self, target_width=1920, target_height=1080, source = "camera", detection_confidence=0.65, max_hands=1,):
         self.target_width = target_width
         self.target_height = target_height
         self.source = source
@@ -131,7 +131,7 @@ class RobotArm:
         down = self.lmList[DIRSEK]
         length = abs(up[0] - down[0])
         angle = ((180 * length)/self.max_length)
-        angle = (angle if angle <= 180 else 180) * sing
+        angle = (angle if angle <= 180 else angle - 180) * sing
         angle = self.limit_value(angle)
         cv2.putText(img, f"aci: {angle:.2f} - uzunluk: {length}", (120, 120),
                     cv2.FONT_HERSHEY_PLAIN, 1, (0, 12, 100), 2)

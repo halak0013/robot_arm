@@ -8,7 +8,7 @@ Bu projemizde ellerimizi kullanarak iki kişilik pin oyunu oynayacağız.
 > Oyunu ister deneyap kartın kamerası ile ister de kendi bilgisayarınızı kamerası ile oynayabilirsiniz. Bunun için RobotArm.py kodunun sonundaki parametreyi değiştirmeniz gerekmektedir.
 ```python
 if __name__ == "__main__":
-    app = PingPong(source="camera") # source="sock" , "camera"
+    app = RobotArm(source="camera") # source="sock" , "camera"
     app.run()
 ```
 

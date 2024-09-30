@@ -10,11 +10,11 @@ const char* udpAddress = "192.168.x.x";  // UDP istemcisinin IP adresi
 const int udpPort = 12345;                 // UDP portu
 int angles[] = { 0, 0, 0, 0 };
 
-Servo servo1;                   // 1. servo motor için class tanımlanması
-Servo servo2;                   // 2. servo motor için class tanımlanması
-Servo servo3;                   // 3. servo motor için class tanımlanması
-Servo servo4;                   // 3. servo motor için class tanımlanması
-Servo servos[4] = {servo1, servo2, servo3, servo4};
+Servo servo1_omuz;                   // 1. servo motor için class tanımlanması
+Servo servo2_dirsek;                   // 2. servo motor için class tanımlanması
+Servo servo3_bilek;                   // 3. servo motor için class tanımlanması
+Servo servo4_cevre;                   // 3. servo motor için class tanımlanması
+Servo servos[4] = {servo1_omuz, servo2_dirsek, servo3_bilek, servo4_cevre};
 
 WiFiUDP udp;
 
@@ -74,7 +74,6 @@ void receiveDataTask(void* parameter) {
         Serial.println(angles[i]);
         servos[i].write(angles[i]);
       }
-      finger_to_light();
 
       vTaskDelay(10 / portTICK_PERIOD_MS);  // 30 fps için 33ms bekle
     }
@@ -130,15 +129,6 @@ void parseUDPData(const char* udpData, int fingers[5]) {
   }
 }
 
-void finger_to_light() {
-  for (int i = 0; i < 4; i++) {
-    if (angles[i] == 1) {
-      digitalWrite(angles[i], HIGH);
-    } else {
-      digitalWrite(angles[i], LOW);
-    }
-  }
-}
 
 void cameraInit(void) {
   // Kamera ayarları (kodunuzdaki gibi)
