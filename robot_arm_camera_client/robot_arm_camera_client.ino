@@ -14,7 +14,8 @@ Servo servo1_omuz;                   // 1. servo motor için class tanımlanmas�
 Servo servo2_dirsek;                   // 2. servo motor için class tanımlanması
 Servo servo3_bilek;                   // 3. servo motor için class tanımlanması
 Servo servo4_cevre;                   // 3. servo motor için class tanımlanması
-Servo servos[4] = {servo1_omuz, servo2_dirsek, servo3_bilek, servo4_cevre};
+Servo servo5_kiskac2;
+Servo servos[5] = {servo1_omuz, servo2_dirsek, servo3_bilek, servo4_cevre, servo5_kiskac2};
 
 WiFiUDP udp;
 
@@ -29,6 +30,7 @@ void setup() {
   servos[1].attach(D13, 1);          // 2. servo motorun D13 pinine ve 1 kanal ayarlanması
   servos[2].attach(D14, 2);          // 3. servo motorun D14 pinine ve 2 kanal ayarlanması
   servos[3].attach(A7, 3);           // 4. servo motorun A7 pinine ve 3 kanal ayarlanması
+  servos[4].attach(D9, 3);           // 4. servo motorun A7 pinine ve 3 kanal ayarlanması
 
   WiFi.begin(ssid, password);
 
@@ -72,6 +74,9 @@ void receiveDataTask(void* parameter) {
         Serial.print(i);
         Serial.print(": ");
         Serial.println(angles[i]);
+        if (i == 2){
+        servos[2].write(90 - angles[i]);
+        }
         servos[i].write(angles[i]);
       }
 
